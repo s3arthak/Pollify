@@ -19,7 +19,7 @@ const Details = () => {
     useEffect(() => {
         const fetchPoll = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/polls/${id}`);
+                const response = await axios.get(`https://pollify-h0t9.onrender.com/api/polls/${id}`);
                 setPoll(response.data);
                 setLoading(false);
             } catch (error) {

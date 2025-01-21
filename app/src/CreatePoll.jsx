@@ -29,7 +29,7 @@ const CreatePoll = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/api/polls/create', {
+            const response = await axios.post('https://pollify-h0t9.onrender.com/api/polls/create', {
                 question,
                 options
             });

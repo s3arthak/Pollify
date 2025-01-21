@@ -8,7 +8,7 @@ export const Dashboard = () => {
     useEffect(() => {
         const fetchPolls = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/polls'); // Use GET request
+                const response = await axios.get('https://pollify-h0t9.onrender.com/api/polls'); // Use GET request
                 setPolls(response.data);
             } catch (error) {
                 console.log("Error fetching polls:", error);
