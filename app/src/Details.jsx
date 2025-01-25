@@ -3,10 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from './AuthContext';  
 import { BarChart, CartesianGrid, ResponsiveContainer, XAxis, Tooltip, Legend, Bar } from 'recharts';
-// import { io } from 'socket.io-client';
 
-// // Use lowercase "socket" for consistency
-// const socket = io('http://localhost:5000');
 
 const Details = () => {
     const { id } = useParams();
@@ -48,7 +45,7 @@ const Details = () => {
         }
 
         try {
-            await axios.post(`http://localhost:5000/api/polls/${id}/vote`, {
+            await axios.post(`https://pollify-h0t9.onrender.com/api/polls/${id}/vote`, {
                 optionIndex: selectedOption,
                 userId,
             });
