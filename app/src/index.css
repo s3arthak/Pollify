@@ -1,11 +1,11 @@
 /* Navbar Styling */
 .navbar {
-    background-color: #4CAF50;  /* Background color */
-    padding: 10px 20px;  /* Added padding for more space */
-    text-align: left;  /* Align text to the left */
-    font-size: 28px;  /* Increased font size */
-    color: #D0A2FF;  /* Light purple color */
-    background-color: rgba(128, 0, 128, 0.5);  /* Lighter purple */
+    background-color: #4CAF50; 
+    padding: 10px 20px; 
+    text-align: left; 
+    font-size: 28px;
+    color: #D0A2FF;
+    background-color: rgba(128, 0, 128, 0.5); 
     position: fixed;
     top: 0;
     left: 0px;
@@ -16,16 +16,14 @@
 
 .navbar h1 {
     margin: 0;
-    font-weight: bold;  /* Making the font bold */
+    font-weight: bold;  
     
 }
 
-/* Body Styling */
 body {
-    padding-top: 60px;  /* Adding top padding to prevent content from hiding behind the navbar */
+    padding-top: 60px;  
 }
 
-/* Global Styles */
 body {
     margin: 0;
     display: flex;
@@ -36,7 +34,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Container for Login & Register */
 .container {
     width: 100%;
     max-width: 400px;
@@ -47,36 +44,33 @@ body {
     text-align: center;
 }
 
-/* Form Styling */
 .register-form, .login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Heading */
 h2 {
     color: white;
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Input Groups */
+
 .input-group {
-    width: 100%;
+   width: 93%;
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-/* Label */
 .input-group label {
     color: white;
     margin-bottom: 5px;
 }
 
-/* Input Fields */
+
 .input-group input {
     width: 100%;
     padding: 10px;
@@ -88,7 +82,7 @@ h2 {
     outline: none;
 }
 
-/* Submit Button */
+
 .submit-button {
     width: 100%;
     padding: 10px;
