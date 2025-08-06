@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useAuth } from './AuthContext';  
 import { BarChart, CartesianGrid, ResponsiveContainer, XAxis, Tooltip, Legend, Bar } from 'recharts';
 
-
 const Details = () => {
     const { id } = useParams();
     const { user } = useAuth(); 
@@ -16,7 +15,8 @@ const Details = () => {
     useEffect(() => {
         const fetchPoll = async () => {
             try {
-                const response = await axios.get(`https://pollify-h0t9.onrender.com/api/polls/${id}`);
+                 const response = await axios.get(`https://pollify-h0t9.onrender.com/api/polls/${id}`);
+                // const response = await axios.get(`http://localhost:5000/api/polls/${id}`);
                 setPoll(response.data);
                 setLoading(false);
             } catch (error) {
@@ -25,11 +25,10 @@ const Details = () => {
             }
         };
         fetchPoll();
-     const pollInterval=setInterval(fetchPoll, 3000)
-     return ()=>{
-        clearInterval(pollInterval)
-     }
-        
+        const pollInterval = setInterval(fetchPoll, 3000);
+        return () => {
+            clearInterval(pollInterval);
+        };
     }, [id]);
 
     const handleVote = async () => {
@@ -45,7 +44,8 @@ const Details = () => {
         }
 
         try {
-            await axios.post(`https://pollify-h0t9.onrender.com/api/polls/${id}/vote`, {
+             await axios.post(`https://pollify-h0t9.onrender.com/api/polls/${id}/vote`, {
+          //  await axios.post(`http://localhost:5000/api/polls/${id}/vote`, {
                 optionIndex: selectedOption,
                 userId,
             });
@@ -64,6 +64,12 @@ const Details = () => {
     return (
         <div className="poll-details-container">
             <h2 className="poll-title">{poll.question}</h2>
+
+            
+            {poll.expiresAt && (
+                <p className="poll-expiry">Expires on: {new Date(poll.expiresAt).toLocaleString()}</p>
+            )}
+
             <div className="options-container">
                 {poll.options.map((option, index) => {
                     const percentage = totalVotes === 0 ? 0 : ((option.votes / totalVotes) * 100).toFixed(2);
