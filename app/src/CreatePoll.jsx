@@ -4,6 +4,7 @@ import axios from 'axios';
 const CreatePoll = () => {
     const [question, setQuestion] = useState('');
     const [options, setOptions] = useState(['', '']);
+    const [expiresAt, setExpiresAt] = useState('');
 
     const handleOptionChange = (index, value) => {
         const newOptions = [...options];
@@ -22,23 +23,27 @@ const CreatePoll = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        if (!question || options.length < 2) {
-            alert('Please provide a question and at least two options.');
+
+        if (!question || options.filter(opt => opt.trim() !== '').length < 2) {
+            alert('Please provide a question and at least two non-empty options.');
             return;
         }
 
         try {
-            const response = await axios.post('https://pollify-h0t9.onrender.com/api/polls/create', {
+         //   const response = await axios.post('http://localhost:5000/api/polls/create', {
+            const response = await axios.post('https://pollify-h0t9.onrender.com/api/polls/create',{
                 question,
-                options
+                options,
+                expiresAt: expiresAt ? new Date(expiresAt) : null,
             });
-            
+
             setQuestion('');
-            setOptions(['','']);  
+            setOptions(['', '']);
+            setExpiresAt('');
+            alert('Poll created successfully!');
         } catch (err) {
-            console.log('Error creating poll:');
-            
+            console.log('Error creating poll:', err);
+            alert('Failed to create poll.');
         }
     };
 
@@ -47,7 +52,7 @@ const CreatePoll = () => {
             <h2>Create a new Poll</h2>
             <form className="poll-form" onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label> Question:</label>
+                    <label>Question:</label>
                     <input
                         className='poll-input'
                         value={question}
@@ -57,7 +62,7 @@ const CreatePoll = () => {
                 </div>
 
                 <div className="form-group">
-                    <label> Options:</label>
+                    <label>Options:</label>
                     {options.map((option, index) => (
                         <div key={index} className='option-group'>
                             <input
@@ -67,14 +72,38 @@ const CreatePoll = () => {
                                 className='poll-input'
                             />
                             {options.length > 2 && (
-                                <button type="button" className='remove-button' onClick={() => removeOption(index)}>Remove</button>
+                                <button
+                                    type="button"
+                                    className='remove-button'
+                                    onClick={() => removeOption(index)}
+                                >
+                                    Remove
+                                </button>
                             )}
                         </div>
                     ))}
+                    <button
+                        type="button"
+                        onClick={addOption}
+                        className='add-option-button'
+                    >
+                        Add option
+                    </button>
                 </div>
 
-                <button type="button" onClick={addOption} className='add-option-button'>Add option</button> <br />
-                <button type="submit"  className='submit-button'>Create Poll</button>
+                <div className="form-group">
+                    <label>Poll Expiry (optional):</label>
+                    <input
+                        type="datetime-local"
+                        value={expiresAt}
+                        onChange={(e) => setExpiresAt(e.target.value)}
+                        className='poll-input'
+                    />
+                </div>
+
+                <button type="submit" className='submit-button'>
+                    Create Poll
+                </button>
             </form>
         </div>
     );
