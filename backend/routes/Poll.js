@@ -1,10 +1,11 @@
 const express = require('express');
 const Poll = require('../models/Poll');
 const User = require('../models/User');
+const { generatePollWithAI } = require('../utils/gemini');  
 
 const router = express.Router();
 
-
+//  Manual create poll 
 router.post('/create', async (req, res) => {
     const { question, options, expiresAt } = req.body;
 
@@ -27,6 +28,34 @@ router.post('/create', async (req, res) => {
     }
 });
 
+//  NEW: AI create poll
+router.post('/create-ai', async (req, res) => {
+    const { topic, optionCount, expiresAt } = req.body;
+
+    if (!topic || optionCount < 2) {
+        return res.status(400).json({ error: 'AI poll requires a topic and at least 2 options' });
+    }
+
+    try {
+        const aiPoll = await generatePollWithAI(topic, optionCount);
+        if (!aiPoll) {
+            return res.status(500).json({ error: 'AI failed to generate poll' });
+        }
+
+        const poll = new Poll({
+            question: aiPoll.question,
+            options: aiPoll.options.map(opt => ({ text: opt, votes: 0 })),
+            expiresAt: expiresAt ? new Date(expiresAt) : undefined,
+        });
+
+        await poll.save();
+        res.status(201).json({ message: 'AI Poll created successfully', poll });
+    } catch (error) {
+        console.error('Error creating AI poll:', error);
+        res.status(500).json({ error: 'Error creating AI poll' });
+    }
+});
+
 // Get all polls
 router.get('/', async (req, res) => {
     try {
@@ -38,6 +67,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+//  Get poll by ID
 router.get('/:id', async (req, res) => {
     try {
         const poll = await Poll.findById(req.params.id);
@@ -51,6 +81,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// Vote on a poll
 router.post('/:id/vote', async (req, res) => {
     const { userId, optionIndex } = req.body;
 
@@ -70,7 +101,6 @@ router.post('/:id/vote', async (req, res) => {
             return res.status(400).json({ message: 'Poll has expired' });
         }
 
-        
         if (user.votedPolls.includes(poll._id)) {
             return res.status(400).json({ message: 'User has already voted' });
         }
@@ -79,7 +109,6 @@ router.post('/:id/vote', async (req, res) => {
             return res.status(400).json({ error: 'Invalid option index' });
         }
 
-  
         poll.options[optionIndex].votes += 1;
         await poll.save();
 
