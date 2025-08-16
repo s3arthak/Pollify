@@ -288,3 +288,23 @@ label {
 .create-poll-button:hover {
     background-color: darkblue;
 }
+
+.toggle-container {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toggle-label {
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-label input {
+    margin-right: 8px;
+    transform: scale(1.2);
+}
+
