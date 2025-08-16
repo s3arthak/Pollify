@@ -230,12 +230,15 @@ label {
 
 /* Poll Input */
 .poll-input {
-    width: 100%;
-    padding: 10px;
+    width: 100%;   
+    box-sizing: border-box; 
+    padding: 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background: rgba(255, 255, 255, 0.2);
     color: white;
+    font-size: 16px;
+    outline: none;
 }
 
 /* Option Group */
