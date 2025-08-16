@@ -1,4 +1,4 @@
-/* Navbar Styling */
+
 .navbar {
     background-color: #4CAF50; 
     padding: 10px 20px; 
@@ -99,14 +99,14 @@ h2 {
     background-color: darkblue;
 }
 
-/* Error Message */
+
 .error-message {
     color: red;
     text-align: center;
     margin-top: 10px;
 }
 
-/* Dashboard */
+
 .dashboard-container {
     padding: 20px;
     max-width: 1000px;
@@ -115,7 +115,7 @@ h2 {
     color: white;
 }
 
-/* Poll Grid */
+
 .polls-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -123,7 +123,7 @@ h2 {
     margin-top: 20px;
 }
 
-/* Poll Item */
+
 .poll-item {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid #8222;
@@ -144,7 +144,7 @@ h2 {
     font-weight: bold;
 }
 
-/* Poll Details */
+
 .poll-details-container {
     width: 100%;
     max-width: 800px;
@@ -174,7 +174,7 @@ h2 {
     margin: 10px 0;
 }
 
-/* Vote Button */
+
 .vote-button {
     width: 100%;
     padding: 10px;
@@ -190,14 +190,14 @@ h2 {
     background-color: darkblue;
 }
 
-/* Message */
+
 .message {
     text-align: center;
     margin-top: 10px;
     color: white;
 }
 
-/* Create Poll Container */
+
 .create-poll-container {
     width: 100%;
     max-width: 600px;
@@ -206,12 +206,14 @@ h2 {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     color: white;
+     gap: 20px; 
 }
 
 /* Poll Form */
 .poll-form {
     display: flex;
     flex-direction: column;
+     gap: 20px; 
 }
 
 /* Form Group */
@@ -271,6 +273,7 @@ label {
 .create-poll-container {
     text-align: center;
     margin-bottom: 20px;
+     margin: 40px auto;
 }
 
 .create-poll-button {
